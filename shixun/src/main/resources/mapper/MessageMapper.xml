@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shixun.mapper.MessageMapper">
+
+
+    <!--id为方法名,resultType为结果返回类型-->
+    <select id="queryMessage"  resultType="Message">
+        select * from mybatis.show  ;
+    </select>
+
+
+    <!--插入语句，对象中的属性，可以直接取出来-->
+    <insert id="addMessage" parameterType="Message" >
+        insert into mybatis.show (title,content) values (#{title},#{content});
+    </insert>
+
+    <!--删除用户-->
+    <delete id="deleteMessage" parameterType="string">
+        delete from mybatis.show where id=#{id};
+    </delete>
+
+    <!--id为方法名,resultType为结果返回类型-->
+    <select id="queryMessageById" parameterType="string" resultType="Message">
+        select * from mybatis.show  where  id=#{id};
+    </select>
+
+
+    <!--更改用户语句-->
+    <update id="updateMessage" parameterType="Message" >
+        update mybatis.show set title =#{title},content=#{content} where id=#{id};
+    </update>
+
+
+    <!--查询信息-->
+    <select id="queryByMessage" parameterType="string" resultType="Message">
+        select *  from mybatis.show where content like  concat("%",#{content},"%") or title   like concat("%",#{content},"%")
+    </select>
+
+</mapper>
